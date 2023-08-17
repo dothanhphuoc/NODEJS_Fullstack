@@ -1,5 +1,5 @@
 import db from '../models/index';
-import { createNewUser } from '../services/CRUDService';
+import { createNewUser, displayAllUser } from '../services/CRUDService';
 
 let getHomePage = async (req, res) => {
     try {
@@ -24,12 +24,19 @@ let getCRUD = (req, res) => {
 let postCRUD = async (req, res) => {
     let message = await createNewUser(req.body);
     console.log(message);
-    return res.send("Post CRUD")
+    return res.send("Post CRUD");
+}
+
+let displayCRUD = async (req, res) => {
+    let userList = await displayAllUser();
+    // console.log(userList)
+    return res.render('displayCRUD.ejs', { userList: userList });
 }
 
 module.exports = {
     getHomePage,
     getAboutPage,
     getCRUD,
-    postCRUD
+    postCRUD,
+    displayCRUD
 }
