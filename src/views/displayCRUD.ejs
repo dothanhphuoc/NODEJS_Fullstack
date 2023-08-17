@@ -6,6 +6,11 @@
     <title>Display User CRUD</title>
 
     <style>
+        body {
+            background: rgb(238, 174, 202);
+            background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+        }
+
         table {
             width: 70%;
             margin: 0 auto;
@@ -19,9 +24,36 @@
             border-collapse: collapse;
         }
 
-        th,
+        th {
+            padding: 8px 10px;
+            font-size: 1.4rem;
+        }
+
         td {
             padding: 8px 10px;
+            font-size: 18px;
+        }
+
+        .btn {
+            border: none;
+            outline: none;
+            background-color: rgb(238, 174, 202);
+            background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+            color: #757575;
+            font-size: 18px;
+            padding: 5px 8px;
+            margin: 0 10px;
+            border-radius: 10px;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: .3s linear;
+        }
+
+        .btn:hover {
+            background: rgb(34, 193, 195);
+            background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
+
         }
     </style>
 </head>
@@ -33,6 +65,7 @@
             <th>First Name</th>
             <th>Last Name</th>
             <th>Address</th>
+            <th>Action</th>
         </tr>
 
         <% userList.forEach((user)=> { %>
@@ -48,6 +81,10 @@
                 </td>
                 <td>
                     <%= user.address %>
+                </td>
+                <td style="text-align: center;">
+                    <a href="/edit-crud?id=<%= user.id %>" class="btn btn-edit">Edit</button>
+                        <a href="" class="btn btn-delete">Delete</button>
                 </td>
             </tr>
             <% }) %>
