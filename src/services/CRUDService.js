@@ -99,4 +99,21 @@ let updateUserData = (infoUpdateUser) => {
     })
 }
 
-module.exports = { createNewUser, displayAllUser, getUserInfoId, updateUserData };
+let deleteUserById = (userId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let user = await db.User
+
+            if (user) {
+                await user.destroy({
+                    where: { id: userId }
+                });
+            }
+            resolve()
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
+module.exports = { createNewUser, displayAllUser, getUserInfoId, updateUserData, deleteUserById };
