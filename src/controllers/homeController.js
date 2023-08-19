@@ -13,10 +13,6 @@ let getHomePage = async (req, res) => {
     }
 }
 
-let getAboutPage = (req, res) => {
-    return res.render("aboutPage.ejs");
-}
-
 let getCRUD = (req, res) => {
     return res.render('createCRUD.ejs')
 }
@@ -67,7 +63,6 @@ let deleteCRUD = async (req, res) => {
 
 module.exports = {
     getHomePage,
-    getAboutPage,
     getCRUD,
     postCRUD,
     displayCRUD,
