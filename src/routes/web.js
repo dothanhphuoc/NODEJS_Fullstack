@@ -10,6 +10,7 @@ import {
 } from "../controllers/homeController";
 import {
     handleLogin,
+    handleDisplayListUser
 } from "../controllers/userControllers";
 
 let router = express.Router();
@@ -32,6 +33,8 @@ let initWebRoutes = (app) => {
 
     /** REACTJS text POSTMAN*/
     router.post("/api/login", handleLogin);
+
+    router.get('/api/display-list-user', handleDisplayListUser);
 
     return app.use("/", router);
 }
