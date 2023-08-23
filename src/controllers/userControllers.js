@@ -22,7 +22,7 @@ let handleLogin = async (req, res) => {
 }
 
 let handleDisplayListUser = async (req, res) => {
-    let id = req.body.id; //All, id
+    let id = req.query.id; //All, id
 
     if (id) {
         let users = await displayListUser(id);
