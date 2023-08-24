@@ -10,7 +10,10 @@ import {
 } from "../controllers/homeController";
 import {
     handleLogin,
-    handleDisplayListUser
+    handleDisplayListUser,
+    handleCreateNewUser,
+    handleEditUser,
+    handleDeleteUser
 } from "../controllers/userControllers";
 
 let router = express.Router();
@@ -35,6 +38,13 @@ let initWebRoutes = (app) => {
     router.post("/api/login", handleLogin);
 
     router.get('/api/display-list-user', handleDisplayListUser);
+
+    router.post('/api/create-new-user', handleCreateNewUser);
+
+    router.put('/api/edit-user', handleEditUser);
+
+    router.delete('/api/delete-user', handleDeleteUser);
+
 
     return app.use("/", router);
 }

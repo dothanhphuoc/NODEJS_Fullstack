@@ -1,4 +1,4 @@
-import { handleUserLogin, displayListUser } from "../services/userService";
+import { handleUserLogin, displayListUser, createNewUser, editUser, deleteUser } from "../services/userService";
 
 let handleLogin = async (req, res) => {
     let email = req.body.email;
@@ -40,4 +40,28 @@ let handleDisplayListUser = async (req, res) => {
     }
 }
 
-module.exports = { handleLogin, handleDisplayListUser }
+let handleCreateNewUser = async (req, res) => {
+    let message = await createNewUser(req.body);
+    return res.status(200).json(message)
+}
+
+let handleEditUser = async (req, res) => {
+    let dataUser = req.body;
+    let message = await editUser(dataUser);
+    return res.status(200).json(message)
+}
+
+let handleDeleteUser = async (req, res) => {
+
+    if (!req.body.id) {
+        return res.status(200).json({
+            errCode: 1,
+            errMessage: 'Missing required parameter'
+        })
+    }
+
+    let message = await deleteUser(req.body.id);
+    return res.status(200).json(message)
+}
+
+module.exports = { handleLogin, handleDisplayListUser, handleCreateNewUser, handleEditUser, handleDeleteUser }
