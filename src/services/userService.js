@@ -118,29 +118,29 @@ let createNewUser = (data) => {
         if (check == true) {
             resolve({
                 errCode: 1,
-                message: 'Your email is already in used!, Plz try another email!'
+                errMessage: 'Your email is already in used!, Plz try another email!'
             })
-        }
+        } else {
+            try {
+                let hashPasswordWithBcrypt = await hashUserPassword(data.password);
+                await db.User.create({
+                    email: data.email,
+                    password: hashPasswordWithBcrypt,
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                    address: data.address,
+                    phonenumber: data.phonenumber,
+                    gender: data.gender === '1' ? true : false,
+                    roleId: data.roleId,
+                });
 
-        try {
-            let hashPasswordWithBcrypt = await hashUserPassword(data.password);
-            await db.User.create({
-                email: data.email,
-                password: hashPasswordWithBcrypt,
-                firstName: data.firstName,
-                lastName: data.lastName,
-                address: data.address,
-                phonenumber: data.phonenumber,
-                gender: data.gender === '1' ? true : false,
-                roleId: data.roleId,
-            });
-
-            resolve({
-                errCode: 0,
-                errMessage: "oke oke"
-            });
-        } catch (e) {
-            reject(e)
+                resolve({
+                    errCode: 0,
+                    errMessage: "oke oke"
+                });
+            } catch (e) {
+                reject(e)
+            }
         }
     })
 }
