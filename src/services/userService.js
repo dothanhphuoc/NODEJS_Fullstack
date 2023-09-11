@@ -210,4 +210,35 @@ let deleteUser = (userId) => {
     })
 }
 
-export { handleUserLogin, displayListUser, createNewUser, editUser, deleteUser };
+let getAllcodeService = (typeInput) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!typeInput) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Missing required parameters'
+                })
+            } else {
+                let res = {};
+                let allcode = await db.Allcodes.findAll({
+                    where: { type: typeInput }
+                });
+                res.errCode = 0;
+                res.data = allcode
+                resolve(res);
+            }
+
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+export {
+    handleUserLogin,
+    displayListUser,
+    createNewUser,
+    editUser,
+    deleteUser,
+    getAllcodeService
+};

@@ -1,4 +1,11 @@
-import { handleUserLogin, displayListUser, createNewUser, editUser, deleteUser } from "../services/userService";
+import {
+    handleUserLogin,
+    displayListUser,
+    createNewUser,
+    editUser,
+    deleteUser,
+    getAllcodeService
+} from "../services/userService";
 
 let handleLogin = async (req, res) => {
     let email = req.body.email;
@@ -64,4 +71,26 @@ let handleDeleteUser = async (req, res) => {
     return res.status(200).json(message)
 }
 
-module.exports = { handleLogin, handleDisplayListUser, handleCreateNewUser, handleEditUser, handleDeleteUser }
+let getAllcode = async (req, res) => {
+    try {
+        let type = req.query.type;
+        let data = await getAllcodeService(type);
+        console.log('check data', data)
+        return res.status(200).json(data);
+    } catch (e) {
+        console.log('check get all code sever', e)
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Err from server'
+        })
+    }
+}
+
+module.exports = {
+    handleLogin,
+    handleDisplayListUser,
+    handleCreateNewUser,
+    handleEditUser,
+    handleDeleteUser,
+    getAllcode
+}
